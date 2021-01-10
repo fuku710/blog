@@ -1,6 +1,7 @@
 import NextLink from 'next/link'
-
 import { Box, Heading, Text, Divider, Link } from '@chakra-ui/react'
+
+import { getPost, getPosts } from '../lib/api'
 
 export default function Post({ post }) {
   return (
@@ -23,19 +24,11 @@ export default function Post({ post }) {
   )
 }
 export async function getStaticPaths(content) {
-  const res = await fetch(`${process.env.CMS_BASE_URL}/posts`, {
-    headers: { 'X-API-KEY': process.env.CMS_API_KEY },
-  })
-  const posts = await res.json()
+  const posts = await getPosts()
   const paths = posts.contents.map((post) => `/${post.id}`)
-
   return { paths, fallback: false }
 }
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${process.env.CMS_BASE_URL}/posts/${params.id}`, {
-    headers: { 'X-API-KEY': process.env.CMS_API_KEY },
-  })
-  const post = await res.json()
-
+  const post = await getPost(params.id)
   return { props: { post } }
 }

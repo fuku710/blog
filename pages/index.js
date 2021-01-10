@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import NextLink from 'next/link'
-
 import { Box, Text, UnorderedList, ListItem, Link } from '@chakra-ui/react'
+
+import { getPosts } from '../lib/api'
 
 export default function Home({ posts }) {
   return (
@@ -30,10 +31,6 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`${process.env.CMS_BASE_URL}/posts`, {
-    headers: { 'X-API-KEY': process.env.CMS_API_KEY },
-  })
-  const posts = await res.json()
-
+  const posts = await getPosts()
   return { props: { posts } }
 }
