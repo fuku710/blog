@@ -1,14 +1,25 @@
-import Link from 'next/link'
+import NextLink from 'next/link'
+
+import { Box, Heading, Text, Divider, Link } from '@chakra-ui/react'
 
 export default function Post({ post }) {
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
-      <Link href="/">
-        <a>Top</a>
-      </Link>
-    </div>
+    <Box m="4">
+      <Box m="2">
+        <Heading>{post.title}</Heading>
+        <Text>date : {post.createdAt.substr(0, 10)}</Text>
+      </Box>
+      <Divider />
+      <Box m="2">
+        <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+      </Box>
+      <Divider />
+      <Box m="2">
+        <NextLink href="/">
+          <Link color="teal.500">TOP</Link>
+        </NextLink>
+      </Box>
+    </Box>
   )
 }
 export async function getStaticPaths(content) {

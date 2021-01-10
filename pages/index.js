@@ -1,27 +1,31 @@
 import Head from 'next/head'
-import Link from 'next/link'
+import NextLink from 'next/link'
+
+import { Box, Text, UnorderedList, ListItem, Link } from '@chakra-ui/react'
 
 export default function Home({ posts }) {
   return (
-    <div>
+    <Box>
       <Head>
         <title>Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <div>記事一覧</div>
-        <ul>
+      <Box as="main" m="4">
+        <Text fontSize="2xl">記事一覧</Text>
+        <UnorderedList>
           {posts.contents.map((post) => (
-            <li>
-              <Link href={`/${post.id}`}>
-                <a>{post.title}</a>
-              </Link>
-            </li>
+            <ListItem key={post.id}>
+              <NextLink href={`/${post.id}`}>
+                <Link>
+                  {post.title} [{post.createdAt.substr(0, 10)}]
+                </Link>
+              </NextLink>
+            </ListItem>
           ))}
-        </ul>
-      </main>
-    </div>
+        </UnorderedList>
+      </Box>
+    </Box>
   )
 }
 
