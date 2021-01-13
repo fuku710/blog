@@ -5,17 +5,17 @@ import { getPost, getPosts } from '../lib/api'
 
 export default function Post({ post }) {
   return (
-    <Box m="4">
-      <Box m="2">
+    <Box m={4} w={2 / 3}>
+      <Box m={2}>
         <Heading>{post.title}</Heading>
         <Text>date : {post.createdAt.substr(0, 10)}</Text>
       </Box>
       <Divider />
-      <Box m="2">
+      <Box m={2}>
         <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
       </Box>
       <Divider />
-      <Box m="2">
+      <Box m={2}>
         <NextLink href="/">
           <Link color="teal.500">TOP</Link>
         </NextLink>
