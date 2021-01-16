@@ -19,7 +19,7 @@ export default function Home({ posts }) {
         <UnorderedList listStyleType="none" m="0">
           {posts.contents.map((post) => (
             <ListItem key={post.id} p="1">
-              <NextLink href={`/${post.id}`}>
+              <NextLink href={`/${post.slug}`}>
                 <Link fontSize="xl" letterSpacing="2px" color="teal.500">
                   {post.title} [{post.createdAt.substr(0, 10)}]
                 </Link>
